@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Alert - Security Breach</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .terminal {
+            width: 100%;
+            max-width: 700px;
+            border: 2px solid #ff0033;
+            background: rgba(15, 0, 0, 0.95);
+            padding: 30px;
+            box-shadow: 0 0 40px rgba(255, 0, 51, 0.6);
+            border-radius: 8px;
+        }
+        h1 {
+            color: #ff0033;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff0033;
+        }
+        .subtitle {
+            text-align: center;
+            color: #ff9999;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+        .log {
+            height: 180px;
+            background: #000;
+            border: 1px solid #330000;
+            padding: 15px;
+            overflow-y: hidden;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #00ff66;
+            line-height: 1.5;
+            border-radius: 4px;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #ffcccc;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #111;
+            border: 1px solid #00ff66;
+            height: 22px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff0033, #ff6600);
+            transition: width 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal">
+        <h1>⚠️ تحذير أمني خطير ⚠️</h1>
+        <div class="subtitle">تم اختراق النظام وسحب الصلاحيات بالكامل</div>
+        
+        <div class="log" id="logBox">جاري الاتصال بالسيرفر الخارجي...</div>
+        
+        <div class="progress-label">
+            <span>حالة سحب البيانات:</span>
+            <span id="progressText">0%</span>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+
+    <script>
+        const logs = [
+            "[+] تم الاتصال بعنوان الهدف بنجاح.",
+            "[-] جاري تجاوز الجدار الناري (Firewall)...",
+            "[+] تم اختراق الصلاحيات الجذرية (Root Access).",
+            "[-] جاري سحب ملفات تعريف الارتباط (Cookies)...",
+            "[+] تم العثور على كلمات المرور المحفوظة.",
+            "[-] جاري نسخ الصور والملفات الشخصية...",
+            "[+] جاري رفع البيانات إلى الخادم الخارجي...",
+            "[!] تحذير نهائي: تم تشفير الجهاز بالكامل والسيطرة مكتملة."
+        ];
+
+        let logBox = document.getElementById('logBox');
+        let progressBar = document.getElementById('progressBar');
+        let progressText = document.getElementById('progressText');
+        
+        let i = 0;
+        function runSimulation() {
+            if (i < logs.length) {
+                logBox.innerHTML += "<br>" + logs[i];
+                logBox.scrollTop = logBox.scrollHeight;
+                
+                let progress = ((i + 1) / logs.length) * 100;
+                progressBar.style.width = progress + '%';
+                progressText.innerText = Math.floor(progress) + '%';
+                
+                i++;
+                setTimeout(runSimulation, 800);
+            }
+        }
+
+        setTimeout(runSimulation, 600);
+    </script>
+
+</body>
+</html>
