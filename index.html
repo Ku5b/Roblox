@@ -2,15 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Critical Security Alert</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Alert - Security Breach</title>
     <style>
         body {
-            background-color: #000000;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Courier New", Courier, monospace;
+            background-color: #050505;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,125 +24,110 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 0 40px rgba(0, 122, 255, 0.2);
+            background: rgba(15, 0, 0, 0.95);
+            border: 2px solid #00ff66;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(0, 255, 102, 0.2);
             text-align: center;
-            max-width: 320px;
-            width: 85%;
+            max-width: 500px;
+            width: 90%;
         }
 
         #startScreen h2 {
-            color: #ffffff;
-            font-size: 17px;
-            margin-bottom: 10px;
-            font-weight: 600;
+            color: #00ff66;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00ff66;
         }
 
         #startScreen p {
-            color: #8e8e93;
-            font-size: 13px;
-            margin-bottom: 20px;
-            line-height: 1.4;
+            color: #ffcccc;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            line-height: 1.5;
         }
 
         .start-btn {
-            background-color: #007aff;
-            color: white;
+            background-color: #00ff66;
+            color: #000;
             border: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
+            padding: 14px 30px;
+            border-radius: 6px;
+            font-size: 1.2em;
+            font-weight: bold;
             cursor: pointer;
-            width: 100%;
+            font-family: 'Courier New', Courier, monospace;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+            transition: 0.2s;
         }
 
-        .start-btn:active {
-            background-color: #0056b3;
+        .start-btn:hover {
+            background-color: #00cc55;
         }
 
-        /* شاشة التحذير (مخفية بالبداية) */
-        #mainAlert {
+        /* شاشة التيرمينال الرئيسية (مخفية بالبداية) */
+        .terminal {
             display: none;
-            width: 85%;
-            max-width: 320px;
-            background-color: rgba(30, 30, 30, 0.95);
-            border-radius: 14px;
-            text-align: center;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(255, 0, 51, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            animation: popIn 0.3s ease-out;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .alert-content {
-            padding: 20px 16px 15px 16px;
-        }
-
-        .alert-icon {
-            font-size: 36px;
-            margin-bottom: 8px;
+            width: 100%;
+            max-width: 700px;
+            border: 2px solid #ff0033;
+            background: rgba(15, 0, 0, 0.95);
+            padding: 30px;
+            box-shadow: 0 0 40px rgba(255, 0, 51, 0.6);
+            border-radius: 8px;
         }
 
         h1 {
-            color: #ff3b30;
-            font-size: 18px;
-            font-weight: 700;
-            margin: 0 0 8px 0;
-            letter-spacing: 0.5px;
+            color: #ff0033;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff0033;
         }
 
         .subtitle {
-            color: #ffffff;
+            text-align: center;
+            color: #ff9999;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        .log {
+            height: 180px;
+            background: #000;
+            border: 1px solid #330000;
+            padding: 15px;
+            overflow-y: hidden;
+            margin-bottom: 20px;
             font-size: 13px;
-            line-height: 1.4;
-            margin-bottom: 15px;
-            font-weight: 400;
-        }
-
-        .terminal-box {
-            background: #0a0a0a;
-            border: 1px solid #ff3b30;
-            border-radius: 8px;
-            padding: 10px;
-            text-align: right;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 11px;
             color: #00ff66;
-            height: 90px;
-            overflow: hidden;
-            line-height: 1.4;
-            margin-bottom: 15px;
+            line-height: 1.5;
+            border-radius: 4px;
         }
 
-        .alert-buttons {
+        .progress-label {
             display: flex;
-            border-top: 0.5px solid rgba(255, 255, 255, 0.15);
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #ffcccc;
         }
 
-        .alert-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: #0a84ff;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 12px 0;
-            cursor: pointer;
-            font-family: inherit;
+        .progress-container {
+            width: 100%;
+            background-color: #111;
+            border: 1px solid #00ff66;
+            height: 22px;
+            border-radius: 4px;
+            overflow: hidden;
         }
 
-        .alert-btn:active {
-            background-color: rgba(255, 255, 255, 0.1);
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff0033, #ff6600);
+            transition: width 0.2s ease;
         }
     </style>
 </head>
@@ -150,53 +135,62 @@
 
     <!-- واجهة البداية -->
     <div id="startScreen">
-        <h2>فحص الأمان السريع</h2>
-        <p>اضغط أدناه لبدء فحص ملفات وسجل النظام للتأكد من سلامة الأمان.</p>
-        <button class="start-btn" id="startBtn">بدء الفحص</button>
+        <h2>فحص الأمان المتقدم</h2>
+        <p>انقر أدناه لبدء فحص النظام وسجل الاتصالات وشبكة الجهاز.</p>
+        <button class="start-btn" id="startBtn">بدء الفحص الآن</button>
     </div>
 
-    <!-- شاشة التحذير -->
-    <div id="mainAlert">
-        <div class="alert-content">
-            <div class="alert-icon">⚠️</div>
-            <h1>تحذير أمني لنظام iOS</h1>
-            <div class="subtitle">تم رصد عملية وصول غير مصرح بها. جاري سحب وتشفير بيانات الجهاز بالكامل.</div>
-            
-            <div class="terminal-box" id="logBox">
-                [+] الاتصال بجذر النظام...
-            </div>
+    <!-- شاشة التيرمينال الكبيرة -->
+    <div class="terminal" id="mainTerminal">
+        <h1>⚠️ تحذير أمني خطير ⚠️</h1>
+        <div class="subtitle">تم اختراق النظام وسحب الصلاحيات بالكامل</div>
+        
+        <div class="log" id="logBox">جاري الاتصال بالسيرفر الخارجي...</div>
+        
+        <div class="progress-label">
+            <span>حالة سحب البيانات:</span>
+            <span id="progressText">0%</span>
         </div>
-
-        <div class="alert-buttons">
-            <button class="alert-btn" onclick="alert('لا يمكن التراجع، النظام تحت السيطرة الكاملة!')">إلغاء القفل</button>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
     </div>
 
     <script>
-        // ربط الزر بالحدث برمجياً لضمان الاستجابة الكاملة على الجوال
+        // تفعيل زر البداية لإخفاء الواجهة وإظهار التيرمينال الكبيرة
         document.getElementById('startBtn').addEventListener('click', function() {
             document.getElementById('startScreen').style.display = 'none';
-            document.getElementById('mainAlert').style.display = 'block';
-            runLogs();
+            document.getElementById('mainTerminal').style.display = 'block';
+            runSimulation();
         });
 
         const logs = [
-            "[+] تجاوز جدار الحماية بنجاح.",
-            "[-] جاري سحب كلمات المرور...",
-            "[+] تم الاستيلاء على الجلسات (Sessions).",
-            "[-] جارِ رفع الملفات والصور للخادم...",
-            "[!] تحذير: فقدان كامل للسيطرة."
+            "[+] تم الاتصال بعنوان الهدف بنجاح.",
+            "[-] جاري تجاوز الجدار الناري (Firewall)...",
+            "[+] تم اختراق الصلاحيات الجذرية (Root Access).",
+            "[-] جاري سحب ملفات تعريف الارتباط (Cookies)...",
+            "[+] تم العثور على كلمات المرور المحفوظة.",
+            "[-] جاري نسخ الصور والملفات الشخصية...",
+            "[+] جاري رفع البيانات إلى الخادم الخارجي...",
+            "[!] تحذير نهائي: تم تشفير الجهاز بالكامل والسيطرة مكتملة."
         ];
 
         let logBox = document.getElementById('logBox');
+        let progressBar = document.getElementById('progressBar');
+        let progressText = document.getElementById('progressText');
+        
         let i = 0;
-
-        function runLogs() {
+        function runSimulation() {
             if (i < logs.length) {
                 logBox.innerHTML += "<br>" + logs[i];
                 logBox.scrollTop = logBox.scrollHeight;
+                
+                let progress = ((i + 1) / logs.length) * 100;
+                progressBar.style.width = progress + '%';
+                progressText.innerText = Math.floor(progress) + '%';
+                
                 i++;
-                setTimeout(runLogs, 900);
+                setTimeout(runSimulation, 800);
             }
         }
     </script>
