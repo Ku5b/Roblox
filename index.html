@@ -32,7 +32,6 @@
             text-align: center;
             max-width: 320px;
             width: 85%;
-            transition: opacity 0.4s ease;
         }
 
         #startScreen h2 {
@@ -59,7 +58,6 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: background 0.2s;
         }
 
         .start-btn:active {
@@ -150,16 +148,58 @@
 </head>
 <body>
 
-    <!-- واجهة البداية (زر التحميل / الدخول) -->
+    <!-- واجهة البداية -->
     <div id="startScreen">
         <h2>فحص الأمان السريع</h2>
         <p>اضغط أدناه لبدء فحص ملفات وسجل النظام للتأكد من سلامة الأمان.</p>
-        <button class="start-btn" onclick="startPrank()">بدء الفحص</button>
+        <button class="start-btn" id="startBtn">بدء الفحص</button>
     </div>
 
-    <!-- شاشة التحذير والأكواد (تظهر بعد الضغط) -->
+    <!-- شاشة التحذير -->
     <div id="mainAlert">
         <div class="alert-content">
             <div class="alert-icon">⚠️</div>
             <h1>تحذير أمني لنظام iOS</h1>
-            <div class="subtitle">
+            <div class="subtitle">تم رصد عملية وصول غير مصرح بها. جاري سحب وتشفير بيانات الجهاز بالكامل.</div>
+            
+            <div class="terminal-box" id="logBox">
+                [+] الاتصال بجذر النظام...
+            </div>
+        </div>
+
+        <div class="alert-buttons">
+            <button class="alert-btn" onclick="alert('لا يمكن التراجع، النظام تحت السيطرة الكاملة!')">إلغاء القفل</button>
+        </div>
+    </div>
+
+    <script>
+        // ربط الزر بالحدث برمجياً لضمان الاستجابة الكاملة على الجوال
+        document.getElementById('startBtn').addEventListener('click', function() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('mainAlert').style.display = 'block';
+            runLogs();
+        });
+
+        const logs = [
+            "[+] تجاوز جدار الحماية بنجاح.",
+            "[-] جاري سحب كلمات المرور...",
+            "[+] تم الاستيلاء على الجلسات (Sessions).",
+            "[-] جارِ رفع الملفات والصور للخادم...",
+            "[!] تحذير: فقدان كامل للسيطرة."
+        ];
+
+        let logBox = document.getElementById('logBox');
+        let i = 0;
+
+        function runLogs() {
+            if (i < logs.length) {
+                logBox.innerHTML += "<br>" + logs[i];
+                logBox.scrollTop = logBox.scrollHeight;
+                i++;
+                setTimeout(runLogs, 900);
+            }
+        }
+    </script>
+
+</body>
+</html>
